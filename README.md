@@ -55,3 +55,17 @@ getDuration('1 hour 1 day', 'seconds'); // TS error because lesser units cannot 
 ## Abbreviations
 
 Abbreviations are intentionally not supported. The goal of this library is to reduce the variations in how durations are expressed.
+
+## Alternatives
+
+`hdinf` was primarily designed with the intent of replacing the use of constants rather than allowing dynamic expressions.
+
+If you are already using a library like [dayjs](https://day.js.org/), you can probably find a [native solution](https://day.js.org/docs/en/plugin/duration) for this problem, e.g.,
+
+```ts
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
+dayjs.duration(100, 'days');
+```
