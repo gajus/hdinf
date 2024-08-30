@@ -1,6 +1,6 @@
-# dinf
+# hdinf
 
-dinf (duration in format) parses duration information from human-readable format into an arbitrary format.
+hdinf (human-duration in format) parses duration information from human-readable format into an arbitrary format.
 
 ## Motivation
 
@@ -12,7 +12,7 @@ The frustration of seeing code littered with `86_400` and `60 * 60 * 24` and sim
 import {
   getDuration,
   type HumanDuration,
-} from 'dinf';
+} from 'hdinf';
 
 // parseDuration(duration: HumanDuration, format: 'milliseconds' | 'seconds'): number
 getDuration('1 day', 'seconds');
@@ -40,7 +40,7 @@ This will reduce the number of bugs that are introduced by passing in a duration
 One of the benefits of this library is that the input format is enforced using TypeScript template literal types, i.e. the compiler will complain if you pass in an invalid duration.
 
 ```ts
-import { getDuration } from 'dinf';
+import { getDuration } from 'hdinf';
 
 getDuration('1 day', 'seconds'); // OK
 getDuration('1 day', 'milliseconds'); // OK

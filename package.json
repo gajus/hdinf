@@ -38,10 +38,10 @@
   ],
   "license": "BSD-3-Clause",
   "main": "./dist/index.js",
-  "name": "dinf",
+  "name": "hdinf",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gajus/dinf"
+    "url": "https://github.com/gajus/hdinf"
   },
   "scripts": {
     "build": "rm -fr ./dist && tsc --project tsconfig.build.json",
