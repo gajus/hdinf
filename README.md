@@ -12,9 +12,10 @@ The frustration of seeing code littered with `86_400` and `60 * 60 * 24` and sim
 import {
   getDuration,
   type HumanDuration,
+  type IntervalName,
 } from 'hdinf';
 
-// parseDuration(duration: HumanDuration, format: 'milliseconds' | 'seconds'): number
+// parseDuration(duration: HumanDuration, interval: IntervalName): number
 getDuration('1 day', 'seconds');
 getDuration('1 day 2 hours 3 seconds', 'milliseconds');
 ```

@@ -1,4 +1,4 @@
-export type TimePeriod =
+export type IntervalName =
   | 'day'
   | 'days'
   | 'hour'
@@ -39,7 +39,7 @@ export type HumanDuration =
   | `${number} second${'' | 's'} ${number} millisecond${'' | 's'}`
   | `${number} second${'' | 's'}`;
 
-const timeMultipliers: { [key in TimePeriod]: number } = {
+const timeMultipliers: { [key in IntervalName]: number } = {
   day: 24 * 60 * 60 * 1_000,
   days: 24 * 60 * 60 * 1_000,
   hour: 60 * 60 * 1_000,
@@ -52,7 +52,10 @@ const timeMultipliers: { [key in TimePeriod]: number } = {
   seconds: 1_000,
 };
 
-export const getDuration = (ttl: HumanDuration, format: TimePeriod): number => {
+export const getDuration = (
+  ttl: HumanDuration,
+  format: IntervalName,
+): number => {
   const regex =
     // eslint-disable-next-line unicorn/no-unsafe-regex
     /(\d+(?:\.\d+)?) (milliseconds?|seconds?|minutes?|hours?|days?)/gu;
@@ -63,9 +66,9 @@ export const getDuration = (ttl: HumanDuration, format: TimePeriod): number => {
 
   while ((match = regex.exec(ttl)) !== null) {
     const value = Number.parseFloat(match[1]);
-    const period = match[2] as TimePeriod;
+    const interval = match[2] as IntervalName;
 
-    totalMilliseconds += value * timeMultipliers[period];
+    totalMilliseconds += value * timeMultipliers[interval];
   }
 
   const result = totalMilliseconds / timeMultipliers[format];

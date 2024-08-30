@@ -1,5 +1,5 @@
 export {
   getDuration,
   type HumanDuration,
-  type TimePeriod,
+  type IntervalName,
 } from './getDuration';
