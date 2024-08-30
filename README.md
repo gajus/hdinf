@@ -60,6 +60,8 @@ Abbreviations are intentionally not supported. The goal of this library is to re
 
 `hdinf` was primarily designed with the intent of replacing the use of constants rather than allowing dynamic expressions.
 
+### `dayjs`
+
 If you are already using a library like [dayjs](https://day.js.org/), you can probably find a [native solution](https://day.js.org/docs/en/plugin/duration) for this problem, e.g.,
 
 ```ts
@@ -69,3 +71,10 @@ import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 dayjs.duration(100, 'days');
 ```
+
+### `ms`
+
+My grudge with [ms](https://github.com/vercel/ms) is that:
+
+* it allows arbitrary formats (so you end up with `1ms`, `1msec`, `1millisecond`, etc)
+* it only allows to express output in milliseconds, so you end up with `/ 1000` and similar expressions
