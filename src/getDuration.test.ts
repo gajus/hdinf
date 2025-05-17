@@ -6,9 +6,11 @@ test('single duration', () => {
   expect(getDuration('1 day', 'milliseconds')).toBe(86_400_000);
   expect(getDuration('1 day', 'minutes')).toBe(1_440);
   expect(getDuration('1 day', 'hours')).toBe(24);
+});
 
+test('invalid duration', () => {
   // @ts-expect-error - expect TS to complain about invalid duration
-  getDuration('1 foo', 'seconds');
+  expect(() => getDuration('1 foo', 'seconds')).toThrow();
 });
 
 test('multiple durations', () => {
@@ -18,7 +20,9 @@ test('multiple durations', () => {
   );
   expect(getDuration('1 day 2 hours', 'minutes')).toBe(1_440 + 2 * 60);
   expect(getDuration('1 day 2 hours', 'hours')).toBe(24 + 2);
+});
 
+test('invalid multiple durations', () => {
   // @ts-expect-error - expect TS to complain about invalid duration
-  getDuration('1 day 2 foos', 'seconds');
+  expect(() => getDuration('1 day 2 foos', 'seconds')).toThrow();
 });

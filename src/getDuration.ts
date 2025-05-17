@@ -52,26 +52,27 @@ const timeMultipliers: { [key in IntervalName]: number } = {
   seconds: 1_000,
 };
 
-const DurationRegex =
-  // eslint-disable-next-line unicorn/no-unsafe-regex
-  /(\d+(?:\.\d+)?) (milliseconds?|seconds?|minutes?|hours?|days?)/gu;
-
 export const getDuration = (
   ttl: HumanDuration,
   format: IntervalName,
 ): number => {
+  if (!ttl || typeof ttl !== 'string') {
+    throw new Error('Invalid duration format');
+  }
+  
   let totalMilliseconds = 0;
-
-  let match;
-
-  while ((match = DurationRegex.exec(ttl)) !== null) {
-    const value = Number.parseFloat(match[1]);
-    const interval = match[2] as IntervalName;
-
+  const parts = ttl.split(' ');
+  
+  for (let i = 0; i < parts.length; i += 2) {
+    const value = Number.parseFloat(parts[i]);
+    const interval = parts[i + 1] as IntervalName;
+    
+    if (Number.isNaN(value) || !timeMultipliers[interval]) {
+      throw new Error(`Invalid duration part: ${parts[i]} ${interval}`);
+    }
+    
     totalMilliseconds += value * timeMultipliers[interval];
   }
-
-  const result = totalMilliseconds / timeMultipliers[format];
-
-  return result;
+  
+  return totalMilliseconds / timeMultipliers[format];
 };
