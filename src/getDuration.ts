@@ -52,19 +52,19 @@ const timeMultipliers: { [key in IntervalName]: number } = {
   seconds: 1_000,
 };
 
+const DurationRegex =
+  // eslint-disable-next-line unicorn/no-unsafe-regex
+  /(\d+(?:\.\d+)?) (milliseconds?|seconds?|minutes?|hours?|days?)/gu;
+
 export const getDuration = (
   ttl: HumanDuration,
   format: IntervalName,
 ): number => {
-  const regex =
-    // eslint-disable-next-line unicorn/no-unsafe-regex
-    /(\d+(?:\.\d+)?) (milliseconds?|seconds?|minutes?|hours?|days?)/gu;
-
   let totalMilliseconds = 0;
 
   let match;
 
-  while ((match = regex.exec(ttl)) !== null) {
+  while ((match = DurationRegex.exec(ttl)) !== null) {
     const value = Number.parseFloat(match[1]);
     const interval = match[2] as IntervalName;
 
