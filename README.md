@@ -9,15 +9,11 @@ The frustration of seeing code littered with `86_400` and `60 * 60 * 24` and sim
 ## Usage
 
 ```ts
-import {
-  getDuration,
-  type HumanDuration,
-  type IntervalName,
-} from 'hdinf';
+import { getDuration, type HumanDuration, type IntervalName } from "hdinf";
 
 // parseDuration(duration: HumanDuration, interval: IntervalName): number
-getDuration('1 day', 'seconds');
-getDuration('1 day 2 hours 3 seconds', 'milliseconds');
+getDuration("1 day", "seconds");
+getDuration("1 day 2 hours 3 seconds", "milliseconds");
 ```
 
 In the wild, you should use this library remove any hard-coded durations from your codebase, e.g.,
@@ -41,15 +37,15 @@ This will reduce the number of bugs that are introduced by passing in a duration
 One of the benefits of this library is that the input format is enforced using TypeScript template literal types, i.e. the compiler will complain if you pass in an invalid duration.
 
 ```ts
-import { getDuration } from 'hdinf';
+import { getDuration } from "hdinf";
 
-getDuration('1 day', 'seconds'); // OK
-getDuration('1 day', 'milliseconds'); // OK
-getDuration('1 day', 'minutes'); // OK
-getDuration('1 day', 'hours'); // OK
+getDuration("1 day", "seconds"); // OK
+getDuration("1 day", "milliseconds"); // OK
+getDuration("1 day", "minutes"); // OK
+getDuration("1 day", "hours"); // OK
 
-getDuration('1 foo', 'seconds'); // TS error because foo is not a valid time period
-getDuration('1 hour 1 day', 'seconds'); // TS error because lesser units cannot precede greater units (hour < day)
+getDuration("1 foo", "seconds"); // TS error because foo is not a valid time period
+getDuration("1 hour 1 day", "seconds"); // TS error because lesser units cannot precede greater units (hour < day)
 ```
 
 ## Abbreviations
@@ -65,16 +61,16 @@ Abbreviations are intentionally not supported. The goal of this library is to re
 If you are already using a library like [dayjs](https://day.js.org/), you can probably find a [native solution](https://day.js.org/docs/en/plugin/duration) for this problem, e.g.,
 
 ```ts
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 
 dayjs.extend(duration);
-dayjs.duration(100, 'days');
+dayjs.duration(100, "days");
 ```
 
 ### `ms`
 
 My grudge with [ms](https://github.com/vercel/ms) is that:
 
-* it allows arbitrary formats (so you end up with `1ms`, `1msec`, `1millisecond`, etc)
-* it only allows to express output in milliseconds, so you end up with `/ 1000` and similar expressions
+- it allows arbitrary formats (so you end up with `1ms`, `1msec`, `1millisecond`, etc)
+- it only allows to express output in milliseconds, so you end up with `/ 1000` and similar expressions

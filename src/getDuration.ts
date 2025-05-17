@@ -59,20 +59,20 @@ export const getDuration = (
   if (!ttl || typeof ttl !== 'string') {
     throw new Error('Invalid duration format');
   }
-  
+
   let totalMilliseconds = 0;
   const parts = ttl.split(' ');
-  
-  for (let i = 0; i < parts.length; i += 2) {
-    const value = Number.parseFloat(parts[i]);
-    const interval = parts[i + 1] as IntervalName;
-    
+
+  for (let index = 0; index < parts.length; index += 2) {
+    const value = Number.parseFloat(parts[index]);
+    const interval = parts[index + 1] as IntervalName;
+
     if (Number.isNaN(value) || !timeMultipliers[interval]) {
-      throw new Error(`Invalid duration part: ${parts[i]} ${interval}`);
+      throw new Error(`Invalid duration part: ${parts[index]} ${interval}`);
     }
-    
+
     totalMilliseconds += value * timeMultipliers[interval];
   }
-  
+
   return totalMilliseconds / timeMultipliers[format];
 };
